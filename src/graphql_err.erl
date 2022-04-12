@@ -163,9 +163,9 @@ format_ty({object, Fields}) ->
 format_ty({enum, Ty}) ->
     Inner = format_ty(Ty),
     <<"{enum, ", Inner/binary, "}">>;
-format_ty([Ty]) ->
-    Inner = format_ty(Ty),
-    <<"[", Inner/binary, "]">>;
+format_ty(Types) when is_list(Types)->
+    Inners = lists:join(", ", [format_ty(Ty) || Ty <- Types]),
+    iolist_to_binary(["[", Inners, "]"]);
 format_ty({list, Ty}) ->
     Inner = format_ty(Ty),
     <<"{list, ", Inner/binary, "}">>;
