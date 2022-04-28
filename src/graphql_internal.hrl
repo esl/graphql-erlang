@@ -28,9 +28,9 @@
 
 -record(field, {
 	id :: graphql:name(),
-	args = [] :: [#{ type := graphql_type(),
-                        value := value(),
-                        default := undefined | value() }],
+	args = [] :: [{binary(), #{ type := graphql_type(),
+                                value := value(),
+                                default := undefined | value() }}],
 	directives = [] :: [any()],
 	selection_set = [] :: [any()],
 	alias = undefined :: undefined | graphql:name(),
