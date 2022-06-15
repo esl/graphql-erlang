@@ -12,6 +12,7 @@
 
 -export([crash/2, err/2]).
 
+-spec abort([any()], any()) -> no_return().
 abort(Path, Msg) ->
     abort(Path, uncategorized, Msg).
 
@@ -162,9 +163,9 @@ format_ty({object, Fields}) ->
 format_ty({enum, Ty}) ->
     Inner = format_ty(Ty),
     <<"{enum, ", Inner/binary, "}">>;
-format_ty([Ty]) ->
-    Inner = format_ty(Ty),
-    <<"[", Inner/binary, "]">>;
+format_ty(Types) when is_list(Types)->
+    Inners = lists:join(", ", [format_ty(Ty) || Ty <- Types]),
+    iolist_to_binary(["[", Inners, "]"]);
 format_ty({list, Ty}) ->
     Inner = format_ty(Ty),
     <<"{list, ", Inner/binary, "}">>;
@@ -256,7 +257,7 @@ type_check_err_msg({excess_args, Args}) ->
     io_lib:format("The argument list contains unknown arguments ~p", [Args]);
 type_check_err_msg({type_mismatch, #{ document := Doc, schema := Sch }}) ->
     ["Type mismatch. The query document has a value/variable of type (",
-     graphql_err:format_ty(Doc), ") but the schema expectes type (", graphql_err:format_ty(Sch), ")"];
+     graphql_err:format_ty(Doc), ") but the schema expects type (", graphql_err:format_ty(Sch), ")"];
 type_check_err_msg({type_mismatch, #{ id := ID, document := Doc, schema := Sch }}) ->
     ["Type mismatch on (", ID, "). The query document has a value/variable of type (",
       graphql_err:format_ty(Doc), ") but the schema expects type (", graphql_err:format_ty(Sch), ")"];
