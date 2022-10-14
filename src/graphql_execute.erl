@@ -369,7 +369,7 @@ does_fragment_type_apply(
           #union_type { types = Types } -> lists:member(ID, Types)
       end.
 
-execute_field_await(#ectx{ defer_request_id = ReqId, 
+execute_field_await(#ectx{ defer_request_id = ReqId,
                            ctx = #{ default_timeout := TimeOut}} = Ctx,
                     ElaboratedTy,
                     Fields,
@@ -536,7 +536,7 @@ resolve_field_value(#ectx { op_type = OpType,
                         defer_request_id => ReqId
     },
     try Fun(AnnotatedCallerCtx, Value, Name, Args) of
-        V -> 
+        V ->
             case handle_resolver_result(V) of
                 wrong ->
                     Obj = graphql_schema:id(ObjectType),
@@ -984,7 +984,7 @@ value(#ectx{params = Params, endpoint_ctx = Ep}, SType, #var { id = ID, ty = DTy
     %% Parameter expansion and type check is already completed
     %% at this stage
     case maps:get(name(ID), Params, not_found) of
-        not_found ->
+        Value when Value =:= not_found; Value =:= null ->
             case Default of
                 %% Coerce undefined values to "null"
                 undefined -> var_coerce(Ep, DType, SType, null);
@@ -1200,4 +1200,3 @@ err(#ectx { path = Path }, Reason, More) when is_list(More) ->
 -spec add_path(ectx(), Component :: term()) -> ectx().
 add_path(#ectx{ path = P } = Ctx, C) ->
     Ctx#ectx{ path = [graphql_err:path(C)|P] }.
-
