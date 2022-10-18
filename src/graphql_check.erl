@@ -424,7 +424,7 @@ check_input_obj_(Ctx, Obj, [{Name, #schema_arg { ty = Ty,
     CtxP = add_path(Ctx, Name),
     {ok, Result} =
         case maps:get(Name, Obj, not_found) of
-            not_found ->
+            V when V =:= not_found; V =:= null ->
                 case check_not_found(CtxP, Ty, Default) of
                     undefined ->
                         coerce_default_param(CtxP, null, Ty);
@@ -607,7 +607,7 @@ check_params_(#ctx { vars = VE } = Ctx, OrigParams) ->
             (Key, #vardef { ty = Tau, default = Default}, Parameters) ->
                 CtxP = add_path(Ctx, Key),
                 case maps:get(Key, Parameters, not_found) of
-                    not_found ->
+                    Value when Value =:= not_found; Value =:= null ->
                         case check_not_found(CtxP, Tau, Default) of
                             undefined ->
                                 Parameters;
