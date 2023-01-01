@@ -55,12 +55,15 @@
 -type defer_map() :: #{ worker => pid(),
                         timeout => non_neg_integer(),
                         apply => [fun()]}.
+-type ast() :: document().
 -type result() :: {ok, term()} | {error, term()} | {defer, token()} | {defer, token(), defer_map()}.
 -type name() :: {name, pos_integer(), binary()} | binary().
 -type document() :: #document{}.
 -type directive() :: #directive{}.
--export_type([directive/0,
 
+-export_type([ast/0,
+              directive/0,
+              name/0,
               token/0,
               schema_field/0]).
 
