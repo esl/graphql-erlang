@@ -515,7 +515,7 @@ check_sset_(Ctx, [#field{ args = Args, directives = Dirs,
 %%
 %% We derive an expression in which we have annotated types into
 %% the AST. This helps the later execution stage.
--spec check(term(), term(), undefined | graphql_base_type() | ty()) -> term().
+-spec check(term(), term(), undefined | graphql_base_type() | ty()) -> {ok, #frag{} | #op{}}.
 check(Ctx, #frag { ty = undefined } = Frag, Sigma) ->
     %% The specification has a rule in which if you omit the
     %% type of a fragment, it "picks up" the type of the context
