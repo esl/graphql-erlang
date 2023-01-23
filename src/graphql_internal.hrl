@@ -40,7 +40,7 @@
 
 -record(frag,
         { id :: '...' | graphql:name(), %% One variant is for inline fragments
-          ty :: undefined | graphql_base_type(),
+          ty :: undefined | graphql_base_type() | graphql_check:ty(),
           directives = [] :: [graphql:directive()],
           selection_set = [] :: [#field{}],
           schema = undefined :: 'undefined' | any()
