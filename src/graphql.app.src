@@ -1,6 +1,6 @@
 {application,graphql,
              [{description,"Application for handling GraphQL queries"},
-              {vsn,"0.16.1"},
+              {vsn,git},
               {registered,[]},
               {applications,[kernel,stdlib]},
               {mod,{graphql_app,[]}},
@@ -8,8 +8,8 @@
               {modules,[]},
               {registered,[graphql_schema]},
               {pkg_name,"graphql_erl"},
-              {maintainers,["Jesper Louis Andersen","Martin Gausby"]},
+              {maintainers,["Erlang Solutions", "Jesper Louis Andersen", "Martin Gausby"]},
               {licenses,["Apache 2.0"]},
-              {links,[{"Github","https://github.com/jlouis/graphql-erlang"},
+              {links,[{"Github","https://github.com/esl/graphql-erlang"},
                       {"Tutorial",
                        "https://jlouis.github.io/graphql-erlang-tutorial/"}]}]}.
