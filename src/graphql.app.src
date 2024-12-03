@@ -9,7 +9,7 @@
               {registered,[graphql_schema]},
               {pkg_name,"graphql_erl"},
               {maintainers,["Erlang Solutions", "Jesper Louis Andersen", "Martin Gausby"]},
-              {licenses,["Apache 2.0"]},
+              {licenses,["Apache-2.0"]},
               {links,[{"Github","https://github.com/esl/graphql-erlang"},
                       {"Tutorial",
                        "https://jlouis.github.io/graphql-erlang-tutorial/"}]}]}.
